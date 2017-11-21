@@ -1,0 +1,2 @@
+This is firmware pack/unpack utility for ZTE H118N and H108L Realtek-based routers.
+You also need squashfs-lzma and unsquashfs-lzma (you can get it from firmware-mod-kit) of corresponding versions.
