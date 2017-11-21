@@ -208,7 +208,7 @@ static unsigned char zte_crc32_table[] = {
 0xb4,0x0b,0xbe,0x37, 0xc3,0x0c,0x8e,0xa1, 0x5a,0x05,0xdf,0x1b, 0x2d,0x02,0xef,0x8d
 };
 
-static uint32_t be2int(unsigned char *c) {
+static uint32_t byte_shuffle(unsigned char *c) {
   return c[3] | (c[2] << 8) | (c[1] << 16) | c[0] <<24;
 }
 
@@ -219,7 +219,7 @@ uint32_t zte_crc32(unsigned char *src_mem, size_t input_size) {
 
     size_t cur_ptr;
     for(cur_ptr=0; cur_ptr < input_size; cur_ptr++) {
-      crc = be2int(zte_crc32_table + (((src_mem[cur_ptr] ^ crc) & 0xFF) << 2)) ^ crc >> 8;
+      crc = byte_shuffle(zte_crc32_table + (((src_mem[cur_ptr] ^ crc) & 0xFF) << 2)) ^ crc >> 8;
     }
 
     return ~crc;
