@@ -4,10 +4,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <arpa/inet.h>
 #include <inttypes.h>
 #include <getopt.h>
 #include <time.h>		/* strftime */
+
+#ifdef WIN32
+# include <winsock2.h>		/* you will also need to link to ws2_32 library */
+#else
+# include <arpa/inet.h>
+#endif
 
 /* print value with offset in structure */
 #define OFFSET_PRINT(x,y) (size_t)&x.y - (size_t)&x, ntohl(fw_header.y)
